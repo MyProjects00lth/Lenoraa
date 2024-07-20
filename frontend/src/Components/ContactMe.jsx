@@ -7,7 +7,10 @@ import EmailIcon from '@mui/icons-material/Email';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import emailjs from 'emailjs-com';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import logo from './img/logo.png';
 
 export default function ContactMe() {
@@ -29,7 +32,7 @@ export default function ContactMe() {
         emailjs.send('service_b8xy4w8', 'template_jlv2ywo', templateParams, 'Mupo9YGoJeMdEozJj')
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
-                alert('successful')
+                toast.success('Email sent successfully!');
                 // Optionally clear form fields
                 setName('');
                 setEmail('');
@@ -37,6 +40,7 @@ export default function ContactMe() {
                 setMessage('');
             }, (error) => {
                 console.error('FAILED...', error);
+                toast.error('Failed to send email. Please try again.');
             });
     }
 
@@ -192,7 +196,7 @@ export default function ContactMe() {
                             <Grid sx={{ paddingTop: '20px', paddingLeft: '50px', textAlign: 'left' }}>
                                 <Typography><PlaceIcon /> 47/A, Samagi Mawatha, Jayanthipura, Kurunegala, Sri Lanka</Typography>
                                 <Typography sx={{ paddingTop: '20px' }}><LocalPhoneIcon /> +94 70 666 0008</Typography>
-                                <Typography sx={{ paddingTop: '20px' }}><EmailIcon /> lenoraaofficial@gmail.com</Typography>
+                                <Typography sx={{ paddingTop: '20px' }} ><EmailIcon/> lenoraaofficial@gmail.com</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -203,25 +207,33 @@ export default function ContactMe() {
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <Typography gutterBottom><b>Service</b></Typography>
-                            <a  style={{ textDecoration: 'none', color: 'white', cursor:'pointer' }}><p>Wedding Videography</p></a>
-                            <a  style={{ textDecoration: 'none', color: 'white', cursor:'pointer' }}><p>Casual Videography</p></a>
-                            <a  style={{ textDecoration: 'none', color: 'white', cursor:'pointer' }}><p>Birthday Videography</p></a>
+                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer' }}><p>Wedding Videography</p></a>
+                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer' }}><p>Casual Videography</p></a>
+                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer' }}><p>Birthday Videography</p></a>
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <Typography gutterBottom><b>Follow Us</b></Typography>
-                            <IconButton aria-label="facebook" color='primary' onClick={() => openUrl('https://www.facebook.com')}>
+                            <IconButton aria-label="facebook" color='primary' onClick={() => openUrl('https://www.facebook.com/lenoraastudio?mibextid=LQQJ4d')}>
                                 <FacebookRoundedIcon />
                             </IconButton>
-                            <IconButton aria-label="instagram" color='error' onClick={() => openUrl('https://www.facebook.com')}>
+                            <IconButton aria-label="instagram" sx={{color:'#c71585'}} onClick={() => openUrl('https://www.instagram.com/lenoraa_official?igsh=N2cxOTJpYm5ma2lt')}>
                                 <InstagramIcon />
                             </IconButton>
-                            <IconButton aria-label="whatsapp" color='success' onClick={() => openUrl('https://www.facebook.com')}>
+                            <IconButton aria-label="whatsapp" color='success' onClick={() => openUrl('https://www.whatsapp.com')}>
                                 <WhatsAppIcon />
+                            </IconButton>
+                            <IconButton aria-label="youtube" color='error' onClick={() => openUrl('https://www.youtube.com/@lenoraaweddingfilms')}>
+                                <YouTubeIcon />
                             </IconButton>
                         </Grid>
                     </Grid>
+                    <hr style={{ height: '2px', backgroundColor: 'white' }} />
+                    <Typography style={{ fontSize: '12px', fontWeight: '10' }}>
+                        Design By <a href='https://lakmal-thathsara-portfolio.netlify.app/' style={{ fontSize: '12px', fontWeight: '300' }}>Lakmal Thathsara</a>
+                    </Typography>
                 </Grid>
             </center>
+            <ToastContainer/>
         </Grid>
     )
 }

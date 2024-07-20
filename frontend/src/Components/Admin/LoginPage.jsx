@@ -90,7 +90,7 @@ export default function LoginPage() {
           </Button>
         </Box>
         <Box mt={2} textAlign="center">
-          <Link href="#" variant="body2">
+          <Link href="/resetpwd" variant="body2">
             Forgot Password?
           </Link>
         </Box>

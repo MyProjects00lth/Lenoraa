@@ -23,7 +23,7 @@ export default function NavBar() {
                 <a className="nav-link active" aria-current="page" href="#home" style={{textDecoration: 'none', color: 'black'}}>HOME</a>
               </li>
               <li className="nav-item" style={{ margin: isMobile ? '10px 0' : '0 15px' }}>
-                <a className="nav-link active" aria-current="page" href="#" style={{textDecoration: 'none', color: 'black'}}>GALLERY</a>
+                <a className="nav-link active" aria-current="page" href="#gallery" style={{textDecoration: 'none', color: 'black'}}>GALLERY</a>
               </li>
               <li className="nav-item" style={{ margin: isMobile ? '10px 0' : '0 15px' }}>
                 <a className="nav-link active" aria-current="page" href="#aboutme" style={{textDecoration: 'none', color: 'black'}}>ABOUT ME</a>

@@ -10,7 +10,7 @@ export default function Home() {
             <Grid className='container' id='home'>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={8}>
-                        <div style={{ height: '100%', backgroundColor: '#EAFFEA' }}>
+                        <Grid style={{ height: '100%', backgroundColor: '#EAFFEA' }}>
                             <>
                                 <Typography variant='h2' gutterBottom sx={{ letterSpacing: 3 }}>WE PAINT YOUR</Typography>
                                 <Typography variant='h2' sx={{ color: '#42763D', letterSpacing: 3 }}>MEMORIES</Typography>
@@ -38,12 +38,12 @@ export default function Home() {
                                     </Button>
                                 </Grid>
                             </>
-                        </div>
+                        </Grid>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <div style={{ height: '700px', backgroundColor: '#EAFFEA' }}>
+                        <Grid sx={{ height: '700px', backgroundColor: '#EAFFEA' }}>
                                 <img src={img1} style={{ width: '100%', height: '600px', borderRadius: 300, }} />
-                        </div>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>

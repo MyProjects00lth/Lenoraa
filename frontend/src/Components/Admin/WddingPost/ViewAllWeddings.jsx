@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { Link, useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography, Button, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Grid } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function WeddingsTable() {
   const [weddings, setWeddings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [currentWedding, setCurrentWedding] = useState(null);
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [currentWedding, setCurrentWedding] = useState({ couples: '', date: '', description: '', videoLink: '' });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,21 +43,14 @@ export default function WeddingsTable() {
     const token = localStorage.getItem('token');
     if (token) {
       const decoded = jwtDecode(token);
-      fetchWeddings(decoded.id); // Pass the user ID decoded from the token
+      fetchWeddings(decoded.id);
     } else {
       navigate('/admin');
     }
   }, [navigate]);
 
-  const handleEdit = (wedding) => {
-    setCurrentWedding(wedding);
-    setIsEditMode(true);
-    setOpen(true);
-  };
-
   const handleAdd = () => {
     setCurrentWedding({ couples: '', date: '', description: '', videoLink: '' });
-    setIsEditMode(false);
     setOpen(true);
   };
 
@@ -73,10 +67,12 @@ export default function WeddingsTable() {
 
       if (response.ok) {
         setWeddings(weddings.filter((wedding) => wedding._id !== id));
-        setOpen(false); // Close the dialog if open
+        console.log('SUCCESS!', response.status, response.text);
+        toast.success('Wedding Delete successfully!');
       } else {
         const data = await response.json();
         console.error('Failed to delete wedding:', data.message);
+        toast.error('Failed to delete wedding. Please try again.');
       }
     } catch (error) {
       console.error('Error deleting wedding:', error);
@@ -85,77 +81,66 @@ export default function WeddingsTable() {
 
   const handleClose = () => {
     setOpen(false);
-    setCurrentWedding(null);
+    setCurrentWedding({ couples: '', date: '', description: '', videoLink: '' });
   };
 
-  const handleSave = async () => {
-    if (isEditMode) {
-      // Update existing wedding
+  const handleAddWedding = async () => {
     const token = localStorage.getItem('token');
-      try {
-        const response = await fetch(`http://localhost:8801/Wedding/updatewedding/${currentWedding._id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify(currentWedding),
-        });
+    try {
+      const response = await fetch('http://localhost:8801/Wedding/postwedding', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(currentWedding),
+      });
 
-        const data = await response.json();
-        if (response.ok) {
-          setWeddings(weddings.map((wedding) => (wedding._id === currentWedding._id ? data : wedding)));
-          handleClose();
-        } else {
-          console.error('Failed to update wedding:', data.message);
-        }
-      } catch (error) {
-        console.error('Error updating wedding:', error);
+      const data = await response.json();
+      if (response.ok) {
+        setWeddings([...weddings, data]);
+        toast.success('Wedding added successfully!');
+        handleClose();
+      } else {
+        console.error('Failed to add wedding:', data.message);
+        toast.error('Failed to added wedding. Please try again.');
       }
-    } else {
-      // Add new wedding
-      const token = localStorage.getItem('token');
-      try {
-        const response = await fetch('http://localhost:8801/Wedding/postwedding', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify(currentWedding),
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          setWeddings([...weddings, data]);
-          handleClose();
-        } else {
-          console.error('Failed to add wedding:', data.message);
-        }
-      } catch (error) {
-        console.error('Error adding wedding:', error);
-      }
+    } catch (error) {
+      console.error('Error adding wedding:', error);
     }
+  };
+
+  const handleSave = () => {
+    handleAddWedding();
   };
 
   const columns = [
     { field: 'couples', headerName: 'Couples', width: 200 },
     { field: 'date', headerName: 'Date', width: 200 },
     { field: 'description', headerName: 'Description', width: 400 },
-    { field: 'videoLink', headerName: 'Video Link', width: 340 },
+    { 
+      field: 'videoLink', 
+      headerName: 'Video Link', 
+      width: 340,
+      renderCell: (params) => (
+        <a href={params.value} target="_blank" rel="noopener noreferrer">
+          {params.value}
+        </a>
+      ),
+    },
     {
       field: 'actions',
       headerName: 'Actions',
       width: 150,
       renderCell: (params) => (
         <>
-          <IconButton onClick={() => handleEdit(params.row)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton onClick={() => handleDelete(params.row.id)}>
-            <DeleteIcon />
-          </IconButton>
-        </>
+        <IconButton component={Link} to={`/editwedding/${params.row.id}`} >
+          <EditIcon />
+        </IconButton>
+        <IconButton onClick={() => handleDelete(params.row.id)}>
+          <DeleteIcon />
+        </IconButton>
+        </> 
       ),
     },
   ];
@@ -169,7 +154,8 @@ export default function WeddingsTable() {
   }));
 
   return (
-    <div className='container' style={{paddingTop:'50px'}}>
+    <Grid className='container' sx={{ paddingTop: '50px' }}>
+      <ToastContainer/>
       <Box sx={{ height: 400, width: '100%' }}>
         <Grid container alignItems="center" justifyContent="space-between" spacing={2}>
           <Grid item>
@@ -185,15 +171,15 @@ export default function WeddingsTable() {
         </Grid>
         <DataGrid sx={{ height: 800, width: '100%' }} rows={rows} columns={columns} pageSize={5} loading={loading} />
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>{isEditMode ? 'Edit Wedding' : 'Add Wedding'}</DialogTitle>
+          <DialogTitle>Add Wedding</DialogTitle>
           <DialogContent>
-            <DialogContentText>{isEditMode ? 'Edit the details of the wedding.' : 'Enter the details of the new wedding.'}</DialogContentText>
+            <DialogContentText>Enter the details of the new wedding.</DialogContentText>
             <TextField
               margin="dense"
               label="Couples"
               fullWidth
               required
-              value={currentWedding?.couples || ''}
+              value={currentWedding.couples}
               onChange={(e) => setCurrentWedding({ ...currentWedding, couples: e.target.value })}
             />
             <TextField
@@ -201,15 +187,17 @@ export default function WeddingsTable() {
               margin="dense"
               fullWidth
               required
-              value={currentWedding?.date || ''}
+              value={currentWedding.date}
               onChange={(e) => setCurrentWedding({ ...currentWedding, date: e.target.value })}
             />
             <TextField
               margin="dense"
               label="Description"
               fullWidth
+              multiline
+              rows={4}
               required
-              value={currentWedding?.description || ''}
+              value={currentWedding.description}
               onChange={(e) => setCurrentWedding({ ...currentWedding, description: e.target.value })}
             />
             <TextField
@@ -217,8 +205,7 @@ export default function WeddingsTable() {
               label="Video Link"
               type='url'
               fullWidth
-              required
-              value={currentWedding?.videoLink || ''}
+              value={currentWedding.videoLink}
               onChange={(e) => setCurrentWedding({ ...currentWedding, videoLink: e.target.value })}
             />
           </DialogContent>
@@ -232,6 +219,6 @@ export default function WeddingsTable() {
           </DialogActions>
         </Dialog>
       </Box>
-    </div>
+    </Grid>
   );
 }

@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/verifyToken');
-// const Package = require('../models/OneDayFHDPkg');
+const Package = require('../models/OneDayFHDPkg');
 
 // Create a new package
-router.post('/postpackage',verifyToken , async (req, res) => {
+router.post('/postpackage' , async (req, res) => {
     try {
-        const { packageName, pkgDetails, price } = req.body;
+        const { basic, silver, gold, platinum, goingAway, droneCamera, highlightVideo, pendriver16, pendriver32, pendriver64 } = req.body;
         const newPackage = new Package({
-            packageName,
-            pkgDetails,
-            price
+            basic, silver, gold, platinum, goingAway, droneCamera, highlightVideo, pendriver16, pendriver32, pendriver64
         });
         await newPackage.save();
         res.status(201).json(newPackage);
@@ -20,7 +18,7 @@ router.post('/postpackage',verifyToken , async (req, res) => {
 });
 
 // Get all packages
-router.get('/allPackages', verifyToken, async (req, res) => {
+router.get('/allPackages', async (req, res) => {
     try {
         const packages = await Package.find();
         res.status(200).json(packages);
@@ -30,7 +28,7 @@ router.get('/allPackages', verifyToken, async (req, res) => {
 });
 
 // Get a package by ID
-router.get('/package/:id', verifyToken, async (req, res) => {
+router.get('/package/:id', async (req, res) => {
     try {
         const package = await Package.findById(req.params.id);
         if (!package) {
@@ -43,31 +41,18 @@ router.get('/package/:id', verifyToken, async (req, res) => {
 });
 
 // Update a package by ID
-router.put('/updatepackage/:id', verifyToken, async (req, res) => {
+router.put('/updatepackage/:id', async (req, res) => {
     try {
-        const { packageName, pkgDetails, price } = req.body;
+        const { basic, silver, gold, platinum, goingAway, droneCamera, highlightVideo, pendriver16, pendriver32, pendriver64 } = req.body;
         const updatedPackage = await Package.findByIdAndUpdate(
             req.params.id,
-            { packageName, pkgDetails, price },
+            { basic, silver, gold, platinum, goingAway, droneCamera, highlightVideo, pendriver16, pendriver32, pendriver64 },
             { new: true }
         );
         if (!updatedPackage) {
             return res.status(404).json({ message: 'Package not found' });
         }
         res.status(200).json(updatedPackage);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Delete a package by ID
-router.delete('/deletepackage/:id', verifyToken, async (req, res) => {
-    try {
-        const deletedPackage = await Package.findByIdAndDelete(req.params.id);
-        if (!deletedPackage) {
-            return res.status(404).json({ message: 'Package not found' });
-        }
-        res.status(200).json({ message: 'Package deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

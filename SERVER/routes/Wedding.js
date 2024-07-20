@@ -30,6 +30,16 @@ router.get('/allWedding',verifyToken, async (req, res) => {
     }
 });
 
+// Get all weddings for frontend
+router.get('/allEvents', async (req, res) => {
+    try {
+        const weddings = await Wedding.find();
+        res.status(200).json(weddings);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Get a wedding by ID
 router.get('/wedding/:id',verifyToken, async (req, res) => {
     try {

@@ -34,6 +34,8 @@ app.use("/AdminUser", AdminUserRouter);
 const WeddingRouter = require("./routes/Wedding.js");
 app.use("/Wedding", WeddingRouter);
 
+const OneDayFHDPkgRouter = require("./routes/OneDayFHDPkg.js");
+app.use("/OneDayFHD", OneDayFHDPkgRouter);
 
 
 app.listen(PORT, () => {
