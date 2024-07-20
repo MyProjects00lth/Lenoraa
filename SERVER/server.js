@@ -31,6 +31,13 @@ connection.once("open", () => {
 const AdminUserRouter = require("./routes/AdminUser.js");
 app.use("/AdminUser", AdminUserRouter);
 
+const WeddingRouter = require("./routes/Wedding.js");
+app.use("/Wedding", WeddingRouter);
+
+const OneDayFHDPkgRouter = require("./routes/OneDayFHDPkg.js");
+app.use("/OneDayFHD", OneDayFHDPkgRouter);
+
+
 app.listen(PORT, () => {
     console.log(`Server is up and running on the port number: ${PORT}`);
 });
