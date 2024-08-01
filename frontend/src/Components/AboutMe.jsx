@@ -7,7 +7,7 @@ export default function AboutMe() {
         <Grid className='container' id='aboutme'>
             <center>
                 <Grid>
-                    <Typography variant='h5' sx={{ color: '#42763D', letterSpacing: 3, paddingTop: '50px'}}><b>ABOUT ME</b></Typography>
+                    <Typography variant='h5' sx={{ color: '#42763D', letterSpacing: 3, paddingTop: '50px', fontFamily: 'Poppins'}}><b>ABOUT ME</b></Typography>
                     <Grid sx={{ paddingTop: '50px' }}>
                         <img src={profileimg} alt='profileimg' style={{ width: '300px', height: '300px', borderRadius: '400px' }} />
                     </Grid>
@@ -20,10 +20,10 @@ export default function AboutMe() {
                     >
                         Madhushanka Yomal
                     </Typography>
-                    <Typography variant='h6'>
+                    <Typography variant='h6' sx={{fontFamily: 'Poppins'}}>
                         <b>Professional Videographer & Cinematographer</b>
                     </Typography>
-                    <Typography sx={{width: '90%', paddingBottom: '50px'}}>
+                    <Typography sx={{width: '90%', paddingBottom: '50px', fontFamily: 'Poppins'}}>
                         With a passion for visual storytelling and a wealth of experience in the industry, Madhushanka Yomal is your go-to professional for all
                         things video production. As a skilled cinematographer and digital creator, Madhushanka brings a unique blend of creativity and
                         technical expertise to every project. With a keen eye for detail and a commitment to excellence, he consistently
