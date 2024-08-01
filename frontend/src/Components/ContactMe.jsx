@@ -52,12 +52,12 @@ export default function ContactMe() {
         <Grid sx={{ backgroundColor: '#282828', color: 'white', padding: '20px' }}>
             <center>
                 <Grid className='container' id='contactme'>
-                    <Typography variant='h5' sx={{ letterSpacing: 5, paddingTop: '50px', paddingBottom: '50px' }}>
+                    <Typography variant='h5' sx={{ letterSpacing: 5, paddingTop: '50px', paddingBottom: '50px', fontFamily: 'Poppins' }}>
                         LET’S CREATE SOMETHING BEAUTIFUL TOGETHER!
                     </Typography>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <Typography variant='h5'>Let me know</Typography>
+                            <Typography variant='h5' sx={{ fontFamily: 'Poppins' }}>Let me know</Typography>
                             <form onSubmit={sendMail}>
                                 <TextField
                                     fullWidth
@@ -183,20 +183,26 @@ export default function ContactMe() {
                                         backgroundColor: 'white',
                                         borderRadius: 20,
                                         '&:hover': {
-                                            backgroundColor: 'white',
+                                            backgroundColor: 'gray',
+                                            color: 'white'
                                         },
                                     }}
                                 >
-                                    <b style={{ paddingRight: '20px', paddingLeft: '20px', color: 'black' }}>SUBMIT</b>
+                                    <b style={{
+                                        paddingRight: '20px', paddingLeft: '20px', color: 'black',
+                                        '&:hover': {
+                                            color: 'white'
+                                        },
+                                    }}>SUBMIT</b>
                                 </Button>
                             </form>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <Typography variant='h5'>Contact Me</Typography>
+                            <Typography variant='h5' sx={{ fontFamily: 'Poppins' }}>Contact Me</Typography>
                             <Grid sx={{ paddingTop: '20px', paddingLeft: '50px', textAlign: 'left' }}>
-                                <Typography><PlaceIcon /> 47/A, Samagi Mawatha, Jayanthipura, Kurunegala, Sri Lanka</Typography>
-                                <Typography sx={{ paddingTop: '20px' }}><LocalPhoneIcon /> +94 70 666 0008</Typography>
-                                <Typography sx={{ paddingTop: '20px' }} ><EmailIcon/> lenoraaofficial@gmail.com</Typography>
+                                <Typography sx={{ fontFamily: 'Poppins' }}><PlaceIcon /> 47/A, Samagi Mawatha, Jayanthipura, Kurunegala, Sri Lanka</Typography>
+                                <Typography sx={{ paddingTop: '20px', fontFamily: 'Poppins' }}><LocalPhoneIcon /> +94 70 666 0008</Typography>
+                                <Typography sx={{ paddingTop: '20px', fontFamily: 'Poppins' }} ><EmailIcon /> lenoraaofficial@gmail.com</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -206,17 +212,17 @@ export default function ContactMe() {
                             <img src={logo} style={{ width: '150px' }} alt="Logo" />
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Typography gutterBottom><b>Service</b></Typography>
-                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer' }}><p>Wedding Videography</p></a>
-                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer' }}><p>Casual Videography</p></a>
-                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer' }}><p>Birthday Videography</p></a>
+                            <Typography gutterBottom sx={{ fontFamily: 'Poppins' }}><b>Service</b></Typography>
+                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer', fontFamily: 'Poppins' }}><p>Wedding Videography</p></a>
+                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer', fontFamily: 'Poppins' }}><p>Event Videography</p></a>
+                            <a style={{ textDecoration: 'none', color: 'white', cursor: 'pointer', fontFamily: 'Poppins' }}><p>Live Stream</p></a>
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Typography gutterBottom><b>Follow Us</b></Typography>
+                            <Typography gutterBottom sx={{ fontFamily: 'Poppins' }}><b>Follow Us</b></Typography>
                             <IconButton aria-label="facebook" color='primary' onClick={() => openUrl('https://www.facebook.com/lenoraastudio?mibextid=LQQJ4d')}>
                                 <FacebookRoundedIcon />
                             </IconButton>
-                            <IconButton aria-label="instagram" sx={{color:'#c71585'}} onClick={() => openUrl('https://www.instagram.com/lenoraa_official?igsh=N2cxOTJpYm5ma2lt')}>
+                            <IconButton aria-label="instagram" sx={{ color: '#c71585' }} onClick={() => openUrl('https://www.instagram.com/lenoraa_official?igsh=N2cxOTJpYm5ma2lt')}>
                                 <InstagramIcon />
                             </IconButton>
                             <IconButton aria-label="whatsapp" color='success' onClick={() => openUrl('https://www.whatsapp.com')}>
@@ -228,12 +234,12 @@ export default function ContactMe() {
                         </Grid>
                     </Grid>
                     <hr style={{ height: '2px', backgroundColor: 'white' }} />
-                    <Typography style={{ fontSize: '12px', fontWeight: '10' }}>
+                    <Typography style={{ fontSize: '12px', fontWeight: '10', fontFamily: 'Poppins' }}>
                         Design By <a href='https://lakmal-thathsara-portfolio.netlify.app/' style={{ fontSize: '12px', fontWeight: '300' }}>Lakmal Thathsara</a>
                     </Typography>
                 </Grid>
             </center>
-            <ToastContainer/>
+            <ToastContainer />
         </Grid>
     )
 }

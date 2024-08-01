@@ -12,14 +12,14 @@ export default function Home() {
                     <Grid item xs={12} sm={8}>
                         <Grid style={{ height: '100%', backgroundColor: '#EAFFEA' }}>
                             <>
-                                <Typography variant='h2' gutterBottom sx={{ letterSpacing: 3 }}>WE PAINT YOUR</Typography>
-                                <Typography variant='h2' sx={{ color: '#42763D', letterSpacing: 3 }}>MEMORIES</Typography>
-                                <Typography style={{ paddingTop: '50px' }}>
-                                    Welcome to Lenoraa's cinematic journey, where stories come to life through the lens of a camera. As a passionate videographer,
-                                    Lenoraa specializes in crafting visually stunning narratives that capture the essence of every moment. Whether it's a heartfelt
-                                    wedding, a captivating documentary, or a dynamic promotional video, Lenoraa brings creativity and expertise to each project,
-                                    ensuring a captivating visual experience that resonates with audiences. Explore Lenoraa's
-                                    portfolio and embark on a visual odyssey filled with emotion, depth, and unparalleled storytelling.
+                            <Typography variant='h2' gutterBottom sx={{ letterSpacing: 3, fontFamily: 'Poppins' }}>WE PAINT YOUR</Typography>
+                            <Typography variant='h2' sx={{ color: '#42763D', letterSpacing: 3, fontFamily: 'Poppins' }}>MEMORIES</Typography>
+                                <Typography style={{ paddingTop: '50px', fontFamily: 'Poppins' }}>
+                                    Welcome to Lenoraa's cinematic journey, where stories come to life through the lens <br/> of a camera. As a passionate videographer,
+                                    Lenoraa specializes in crafting visually stunning <br/> narratives that capture the essence of every moment. Whether it's a heartfelt
+                                    wedding, a <br/>  captivating documentary, or a dynamic promotional video, Lenoraa brings creativity and <br/> expertise to each project,
+                                    ensuring a captivating visual experience that resonates with <br/> audiences. Explore Lenoraa's
+                                    portfolio and embark on a visual odyssey filled <br/> with emotion, depth, and unparalleled storytelling.
                                 </Typography>
                                 <Grid sx={{ paddingTop: '20px' }}>
                                     <Button

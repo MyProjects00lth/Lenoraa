@@ -45,7 +45,7 @@ export default function Gallery() {
       {/* <NavBar /> */}
       <Grid item className="container" id='gallery'>
         <center>
-          <Typography variant="h5" sx={{ color: '#42763D', letterSpacing: 3, paddingTop: '50px' }}>
+          <Typography variant="h5" sx={{ color: '#42763D', letterSpacing: 3, paddingTop: '50px', fontFamily: 'Poppins'}}>
             <b>GALLERY</b>
           </Typography>
         </center>
