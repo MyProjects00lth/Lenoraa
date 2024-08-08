@@ -2,7 +2,7 @@
 
 <h2 align="center">Welcome to the Lenoraa website project, a professional platform designed for videographers to showcase their work. This project is built using the MERN stack and styled with Material-UI (MUI).</h2>
 
-<h2 align="center">Features</h2>
+<h2>Features</h2>
 
 - **Professional Portfolio:** Showcase your videography projects with high-quality displays.
 - **Responsive Design:** Optimized for various devices using MUI.
@@ -10,7 +10,7 @@
 - **Admin Panel:** Manage content, users, and settings.
 - **Contact Form:** Easy way for clients to reach out.
 
-<h2 align="center">Technologies Used</h2>
+<h2>Technologies Used</h2>
 
 - **MongoDB:** Database for storing user data and project information.
 - **Express.js:** Backend framework for building the server.
@@ -18,4 +18,4 @@
 - **Node.js:** JavaScript runtime for server-side development.
 - **Material-UI (MUI):** React components for faster and easier web development.
 
-<h2 align="center">Website Link</h2>
+<h2>Website Link</h2>
