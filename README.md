@@ -1,4 +1,4 @@
-<h1 align="center">Lenoraa - Professional Videographer Website</h1>
+<h1 align="center">Lenoraa - Professional Videographer Website 🎉</h1>
 
 <h2 align="center">Welcome to the Lenoraa website project, a professional platform designed for videographers to showcase their work. This project is built using the MERN stack and styled with Material-UI (MUI).</h2>
 
